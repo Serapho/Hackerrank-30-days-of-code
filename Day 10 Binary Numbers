@@ -1,0 +1,42 @@
+/*
+Problem Statement:
+https://www.hackerrank.com/challenges/30-binary-numbers
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        //get input
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        
+        //setup my loop to check for max concurrent 1's
+        int counter = 0;
+        int max = 0;
+        
+        //we will do the conversion mthod from decimal to binary
+        //BUT insted of converting the number completely, we will simply look at each 0 or 1 to determine concurrency
+        while(n>0){
+            if(n%2==1){
+                counter++;
+            }
+            else{
+                if(counter > max){
+                    max = counter;//keep track of the maximum concurrent 1's
+                }
+                counter=0;//reset counter for next possible batch of 1's
+            }
+            n=n/2;
+        }
+        if(counter>max){//do one last check on the final counter
+            max = counter;
+        }
+        System.out.println(max);
+    }
+}
