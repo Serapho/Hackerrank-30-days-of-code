@@ -1,0 +1,47 @@
+/*
+Problem Statement:
+https://www.hackerrank.com/challenges/30-nested-logic
+*/
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner in = new Scanner(System.in);
+        int dayReturned = in.nextInt();
+        int monthReturned = in.nextInt();
+        int yearReturned = in.nextInt();
+        int dueDay = in.nextInt();
+        int dueMonth  = in.nextInt();
+        int dueYear  = in.nextInt();
+        int total=0;
+        
+        //if on or before the expected return date, no fine
+        if(dayReturned <= dueDay && monthReturned ==dueMonth && yearReturned == dueYear){
+            total = 0;
+        }
+        
+        //if returned same month but late a few days
+        if(dayReturned > dueDay && monthReturned ==dueMonth && yearReturned == dueYear){
+            total = 15*(dayReturned-dueDay);
+        }
+        
+        //if returned in the same year but late a few months
+        if(monthReturned > dueMonth && yearReturned == dueYear){
+            total = 500*(monthReturned-dueMonth);
+        }
+        
+        //if not same year
+        if(yearReturned > dueYear){//this yielded correct resuslts as per hackerrank's testing. However I personalyl believe this might be wrong in a case such as: renting a book on December 15th and return it January 5th.
+            total = 10000;
+        }
+        
+        System.out.println(total);
+    }
+}
